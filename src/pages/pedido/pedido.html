@@ -1,0 +1,353 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Nuevo Pedido</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-7>
+        <h2>Nuevo Pedido</h2>
+      </ion-col>
+      <ion-col col-5>
+        <!-- <ion-img width="100%" height="100%" src="/assets/imgs/teleoperadora.png"></ion-img> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-row>
+    <ion-col>
+        
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left (click)="mostrarArticulo()">
+        <ion-icon name="add-circle"></ion-icon>
+        Artículo
+      </button>
+    </ion-col>
+    <ion-col>
+    </ion-col>
+  </ion-row>
+
+  <form [formGroup]="myForm" (ngSubmit)="saveData()">
+    <ion-list>
+      <ion-row>
+        <ion-col col-8 text-center>
+          <strong>Artículos</strong>
+        </ion-col>
+        <ion-col col-4 text-center>
+          <strong>Palets</strong>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo1">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets1" type="number" [value]=palets1 (ionChange)="sumar1($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo2">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets2" type="number" [value]=palets2 (ionChange)="sumar2($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo3">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets3" type="number" [value]=palets3 (ionChange)="sumar3($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!-- 4 ARTICULOS -->
+      <ion-row *ngIf="numeroArticulos>=4">
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo4">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets4" type="number" [value]=palets4 (ionChange)="sumar4($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- 4 ARTICULOS -->
+
+      <!-- 5 ARTICULOS -->
+      <ion-row *ngIf="numeroArticulos>=5">
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo5">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets5" type="number" [value]=palets5 (ionChange)="sumar5($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- 5 ARTICULOS -->
+
+      <!-- 6 ARTICULOS -->
+      <ion-row *ngIf="numeroArticulos>=6">
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo6">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets6" type="number" [value]=palets6 (ionChange)="sumar6($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- 6 ARTICULOS -->
+
+      <!-- 7 ARTICULOS -->
+      <ion-row *ngIf="numeroArticulos>=7">
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo7">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets7" type="number" [value]=palets7 (ionChange)="sumar7($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- 7 ARTICULOS -->
+
+      <!-- 8 ARTICULOS -->
+      <ion-row *ngIf="numeroArticulos>=8">
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo8">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets8" type="number" [value]=palets8 (ionChange)="sumar8($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- 8 ARTICULOS -->
+
+      <!-- 9 ARTICULOS -->
+      <ion-row *ngIf="numeroArticulos>=9">
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo9">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets9" type="number" [value]=palets9 (ionChange)="sumar9($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- 9 ARTICULOS -->
+
+      <!-- 10 ARTICULOS -->
+      <ion-row *ngIf="numeroArticulos>=10">
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo10">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets10" type="number" [value]=palets10 (ionChange)="sumar10($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- 10 ARTICULOS -->
+
+      <!-- 11 ARTICULOS -->
+      <ion-row *ngIf="numeroArticulos>=11">
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo11">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets11" type="number" [value]=palets11 (ionChange)="sumar11($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- 11 ARTICULOS -->
+
+      <!-- 12 ARTICULOS -->
+      <ion-row *ngIf="numeroArticulos>=12">
+        <ion-col col-9>
+          <ion-item>
+            <ion-select formControlName="articulo12">
+              <ion-option *ngFor="let producto of productos" [value]="producto.prod">{{producto.prod}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-input formControlName="palets12" type="number" [value]=palets12 (ionChange)="sumar12($event.value)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- 12 ARTICULOS -->
+
+
+      <ion-row>
+        <ion-col col-4>
+        </ion-col>
+        <ion-col col-5>
+          <ion-item text-right>
+            <strong>Total palets</strong>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item text-center style="background-color: #f53d3d">
+            <strong> {{totalPalets}}</strong>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <br>
+      <ion-row>
+        <ion-col text-right>
+          <strong>Hora Prevista</strong>
+        </ion-col>
+        <ion-col>
+
+        </ion-col>
+      </ion-row>
+
+      <div radio-group formControlName="horaEntrega">
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Mañana 1ª</ion-label>
+              <ion-radio value="manana1"></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Mañana 2ª</ion-label>
+              <ion-radio value="manana2"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Tarde 1ª</ion-label>
+              <ion-radio value="tarde1"></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Tarde 2ª</ion-label>
+              <ion-radio value="tarde2"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col text-right>
+            Al día siguiente
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Mañana</ion-label>
+              <ion-radio value="siguienteManana"></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Tarde</ion-label>
+              <ion-radio value="siguienteTarde"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+      </div>
+
+    </ion-list>
+
+    <ion-row>
+      <ion-col col-3>
+        <strong>Dirección de entrega</strong>
+      </ion-col>
+      <ion-col col-9>
+        <ion-item>
+          <ion-select formControlName="direccion">
+            <ion-option *ngFor="let dir of direcciones" [value]="dir.dir">{{dir.dir}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <strong> Observaciones:</strong>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <ion-textarea formControlName="textArea" rows="4" maxlength="150" style="background-color: lightgrey" [value]="textArea"></ion-textarea>
+      </ion-col>
+    </ion-row>
+    {{textArea}}
+
+    <div padding text-right>
+      <button ion-button type="submit" [disabled]="!myForm.valid">Aceptar</button>
+    </div>
+
+  </form>
+</ion-content>

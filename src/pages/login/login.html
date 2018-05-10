@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input formControlName="email" type="email" placeholder="Tu email" [class.invalid]="!loginForm.controls.email.valid && blur">
+      </ion-input>
+    </ion-item>
+
+    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid &&
+        loginForm.controls.email.touched">
+      <p>Por favor, introduce un email válido.</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Contraseña</ion-label>
+      <ion-input formControlName="password" type="password" placeholder="Tu contraseña" [class.invalid]="!loginForm.controls.password.valid && blur">
+      </ion-input>
+    </ion-item>
+
+    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid
+        && loginForm.controls.password.touched">
+      <p>Tu contraseña necesita más de 6 caracteres.</p>
+    </ion-item>
+
+    <button ion-button block type="submit" [disabled]="!loginForm.valid">
+      Entrar
+    </button>
+  </form>
+  <br>
+  <input [(ngModel)]="terms" type="checkbox"> "He leído y estoy de acuerdo con los siguientes"
+  <a target="_blank" href="http://ideamensch.com/terms-and-conditions"
+    rel="nofollow noopener">términos y condiciones</a>
+  <br>
+  <br>
+
+  <button ion-button block clear (click)="goToResetPassword()">
+    Olvidé mi contraseña :(
+  </button>
+
+</ion-content>

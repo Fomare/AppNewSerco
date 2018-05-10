@@ -1,6 +1,6 @@
 {
   "name": "new-serco",
-  "app_id": "",
+  "app_id": "e9d5b63d",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

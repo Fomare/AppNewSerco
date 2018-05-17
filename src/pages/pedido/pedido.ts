@@ -36,6 +36,7 @@ export class PedidoPage {
   palets12: number;
 
   cont; // la uso para el contador
+  userUid;
 
   numeroArticulos = 3;
 
@@ -54,10 +55,12 @@ export class PedidoPage {
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController
   ) {      
+    this.userUid = this.navParams.get("uid");
+    console.log('UID: '+this.userUid);
     this.myForm = this.createMyForm();
     this.productos = [];
-    this.obtenerProductos();
-    this.obtenerDirecciones();
+    // this.obtenerProductos();
+    // this.obtenerDirecciones();
     this.totalPalets = 0;
     //this.obtenerContador();
   }
@@ -214,28 +217,10 @@ export class PedidoPage {
               datosPedido: formularioFiltrado,
               horaPrevista: horaPrevista,
               direccion: formulario.direccion,
-              observaciones: formulario.textArea,
-              //articulosPedido: articulosFiltrados,
-              //paletsPedido: paletsFiltrados,
+              observaciones: formulario.textArea,              
               atendido: false,
-              usuario: this.currentUser
-              //numeroPedido: this.numeroPedido
-            });
-
-            // firebase
-            //   .database()
-            //   .ref("pedidos/")
-            //   .push({                
-            //     totalPalets: totalPalets,
-            //     datosPedido: formularioFiltrado,                
-            //     atendido: false,
-            //     usuario: this.currentUser
-            //   })
-            //   .then(p => {
-            //     //this.goHome();
-            //   });
-
-            console.log(formulario);
+              usuario: this.currentUser              
+            });            
             
           }
         }
@@ -284,8 +269,9 @@ export class PedidoPage {
     });
   }
 
-  sumar1(valor: string) {
-    const valorInt = parseInt(valor);
+  sumar1(valor) {
+    //var valorInt = parseInt(valor);
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets1 = 0;
     } else {
@@ -295,7 +281,7 @@ export class PedidoPage {
   }
 
   sumar2(valor) {
-    const valorInt = parseInt(valor);
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets2 = 0;
     } else {
@@ -305,7 +291,7 @@ export class PedidoPage {
   }
 
   sumar3(valor) {
-    const valorInt = parseInt(valor);
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets3 = 0;
     } else {
@@ -314,8 +300,8 @@ export class PedidoPage {
     this.sumar();
   }
 
-  sumar4(valor: string) {
-    const valorInt = parseInt(valor);
+  sumar4(valor) {
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets4 = 0;
     } else {
@@ -325,7 +311,7 @@ export class PedidoPage {
   }
 
   sumar5(valor) {
-    const valorInt = parseInt(valor);
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets5 = 0;
     } else {
@@ -335,7 +321,7 @@ export class PedidoPage {
   }
 
   sumar6(valor) {
-    const valorInt = parseInt(valor);
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets6 = 0;
     } else {
@@ -344,8 +330,8 @@ export class PedidoPage {
     this.sumar();
   }
 
-  sumar7(valor: string) {
-    const valorInt = parseInt(valor);
+  sumar7(valor) {
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets7 = 0;
     } else {
@@ -355,7 +341,7 @@ export class PedidoPage {
   }
 
   sumar8(valor) {
-    const valorInt = parseInt(valor);
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets8 = 0;
     } else {
@@ -365,7 +351,7 @@ export class PedidoPage {
   }
 
   sumar9(valor) {
-    const valorInt = parseInt(valor);
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets9 = 0;
     } else {
@@ -374,8 +360,8 @@ export class PedidoPage {
     this.sumar();
   }
 
-  sumar10(valor: string) {
-    const valorInt = parseInt(valor);
+  sumar10(valor) {
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets10 = 0;
     } else {
@@ -385,7 +371,7 @@ export class PedidoPage {
   }
 
   sumar11(valor) {
-    const valorInt = parseInt(valor);
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets11 = 0;
     } else {
@@ -395,7 +381,7 @@ export class PedidoPage {
   }
 
   sumar12(valor) {
-    const valorInt = parseInt(valor);
+    var valorInt = (valor);
     if (isNaN(valorInt)) {
       this.palets12 = 0;
     } else {
@@ -452,35 +438,7 @@ export class PedidoPage {
       this.palets10 +
       this.palets11 +
       this.palets12;
-  }
-
-  // obtenerContador(){
-  //   const counterRef = firebase.database().ref('/counter');
-  //   const q = counterRef.orderByChild('count');
-  //   q.on('value',snap => {
-  //     var contador = snap.val().count;
-  //     console.log('CONTADOR!!!: '+contador);
-  //   });
-    
-
-    // this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
-    //         console.log("+++ userProfile: " + this.userProfile);
-    //         const query = this.userProfile.orderByChild("rol");
-    //         query.on("value", snap => {
-    //           console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + snap.val().rol);
-    //           var rol = snap.val().rol;
-    //           if (rol == "user") {
-    //             this.esAdmin = false;
-    //             //this.router.navigate(["/login"]);
-    //             //this.logoutUser();
-    //           }
-    //           if (rol == "admin") {
-    //             this.esAdmin = true;
-    //             console.log("Navega a dashboard");
-    //             this.router.navigate(["/pedidos"]);
-    //           }
-    //         });
-  //}
+  }  
 
   obtenerNumeroPedido(){
 
@@ -493,16 +451,7 @@ export class PedidoPage {
     });
       resolve(true);
     });
-
-
-    /*
-    const dbNumeroPedido = firebase.database().
-      ref("pedidosEmail")
-      .on('value', eventListSnapshot => {      
-      console.log("Numero de pedidos: "+eventListSnapshot.numChildren());
-      this.numeroPedido = eventListSnapshot.numChildren()+1;
-    });
-    */
+   
   }
 
   sumarContador(){
@@ -510,8 +459,7 @@ export class PedidoPage {
     const q = counterRef.orderByChild("count");
     q.on("value", snap => {
 
-      var contador = snap.val().count;
-      console.log('Contador vale: '+contador);
+      var contador = snap.val().count;      
       var nuevoCount = contador +1;
       var updates = {};
       var postData = {
@@ -568,5 +516,8 @@ export class PedidoPage {
     });
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+    this.obtenerProductos();
+    this.obtenerDirecciones();
+  }
 }

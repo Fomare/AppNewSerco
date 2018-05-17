@@ -42,11 +42,7 @@ export class LoginPage {
         Validators.compose([Validators.required, Validators.minLength(6)])
       ]
     });
-  }
-
-  // goToSignup():void {
-  //   this.navCtrl.push('SignupPage');
-  // }
+  } 
 
   goToResetPassword():void {
     this.navCtrl.push('ResetPasswordPage');
@@ -55,7 +51,7 @@ export class LoginPage {
   loginUser(): void {
     
     if (!this.loginForm.valid) {
-      //console.log(`Form is not valid yet, current value: ${this.loginForm.value}`);
+      
     }
     if (!this.terms) {
       const alert: Alert = this.alertCtrl.create({

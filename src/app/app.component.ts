@@ -23,10 +23,10 @@ export class MyApp {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (!user) {
         this.rootPage = 'LoginPage';
-        unsubscribe();
+        //unsubscribe();
       } else {
         this.rootPage = HomePage;
-        unsubscribe();
+        //unsubscribe();
       }
     });
     

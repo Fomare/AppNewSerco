@@ -4,7 +4,7 @@ import { PedidoRealizadoPage } from './pedido-realizado';
 
 @NgModule({
   declarations: [
-    PedidoRealizadoPage,
+    // PedidoRealizadoPage,
   ],
   imports: [
     IonicPageModule.forChild(PedidoRealizadoPage),

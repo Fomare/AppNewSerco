@@ -33,9 +33,7 @@ export class ResetPasswordPage {
 
   resetPassword(): void {
     if (!this.resetPasswordForm.valid) {
-      console.log(
-        `Form is not valid yet, current value: ${this.resetPasswordForm.value}`
-      );
+      
     } else {
       const email: string = this.resetPasswordForm.value.email;
       this.authProvider.resetPassword(email).then(
@@ -66,6 +64,6 @@ export class ResetPasswordPage {
   }
 
   ionViewDidLoad() {
-    console.log("ionViewDidLoad ResetPasswordPage");
+    
   }
 }

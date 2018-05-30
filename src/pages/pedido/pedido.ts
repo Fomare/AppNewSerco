@@ -21,7 +21,7 @@ export class PedidoPage {
   myForm: FormGroup;
   articulos = [];
   numeroPedido;
-  //userUid;  
+  //userUid;
   palets1: number;
   palets2: number;
   palets3: number;
@@ -37,6 +37,9 @@ export class PedidoPage {
 
   cont; // la uso para el contador
   userUid;
+
+  email = "";
+  empresa = "";
 
   numeroArticulos = 3;
 
@@ -54,15 +57,46 @@ export class PedidoPage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController
-  ) {      
+  ) {
     this.userUid = this.navParams.get("uid");
-    console.log('UID: '+this.userUid);
+    console.log("UID: " + this.userUid);
     this.myForm = this.createMyForm();
     this.productos = [];
     // this.obtenerProductos();
     // this.obtenerDirecciones();
     this.totalPalets = 0;
     //this.obtenerContador();
+  }
+
+  logout(): Promise<void> {
+    const userId: string = firebase.auth().currentUser.uid;
+    firebase
+      .database()
+      .ref(`/userProfile/${userId}`)
+      .off();
+    return firebase.auth().signOut();
+  }
+
+  salir() {
+    let confirm = this.alertCtrl.create({
+      title: "Cerrar sesión",
+      message: "¿Estás seguro de que quieres cerrar la aplicación?",
+      buttons: [
+        {
+          text: "No",
+          handler: () => {
+            return true;
+          }
+        },
+        {
+          text: "Sí",
+          handler: () => {
+            this.logout();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   saveData() {
@@ -84,7 +118,7 @@ export class PedidoPage {
         subTitle: "Ha dejado un artículo sin indicar",
         buttons: ["OK"]
       });
-      alert.present();      
+      alert.present();
       return;
     }
 
@@ -104,7 +138,7 @@ export class PedidoPage {
         subTitle: "No ha indicado cantidad para un artículo seleccionado",
         buttons: ["OK"]
       });
-      alert2.present();     
+      alert2.present();
       return;
     }
 
@@ -119,72 +153,105 @@ export class PedidoPage {
         {
           text: "Ok",
           handler: () => {
-            
-            
             let totalPalets = this.totalPalets;
             let formulario = this.myForm.value;
             let formularioFiltrado = [];
             let articulosFiltrados = [];
             let paletsFiltrados = [];
             //formularioFiltrado.push({'articulo1':formulario.articulo1},{'palets1':formulario.palets1});
-            formularioFiltrado.push({'articulo':formulario.articulo1,'palets':formulario.palets1});
+            formularioFiltrado.push({
+              articulo: formulario.articulo1,
+              palets: formulario.palets1
+            });
             // articulosFiltrados.push({'art':formulario.articulo1});
             // paletsFiltrados.push({'palet':formulario.palets1});
 
-
-            if(formulario.articulo2 != null && formulario.palets2 !=0){
+            if (formulario.articulo2 != null && formulario.palets2 != 0) {
               //formularioFiltrado.push({'articulo2':formulario.articulo2},{'palets2':formulario.palets2});
-              formularioFiltrado.push({'articulo':formulario.articulo2,'palets':formulario.palets2});
+              formularioFiltrado.push({
+                articulo: formulario.articulo2,
+                palets: formulario.palets2
+              });
               // articulosFiltrados.push({'art':formulario.articulo2});
               // paletsFiltrados.push({'palet':formulario.palets2});
             }
-            if(formulario.articulo3 != null && formulario.palets3 !=0){
-              formularioFiltrado.push({'articulo':formulario.articulo3,'palets':formulario.palets3});
+            if (formulario.articulo3 != null && formulario.palets3 != 0) {
+              formularioFiltrado.push({
+                articulo: formulario.articulo3,
+                palets: formulario.palets3
+              });
               // articulosFiltrados.push({'art':formulario.articulo3});
               // paletsFiltrados.push({'palet':formulario.palets3});
             }
-            if(formulario.articulo4 != null && formulario.palets4 !=0){
-              formularioFiltrado.push({'articulo':formulario.articulo4,'palets':formulario.palets4});
+            if (formulario.articulo4 != null && formulario.palets4 != 0) {
+              formularioFiltrado.push({
+                articulo: formulario.articulo4,
+                palets: formulario.palets4
+              });
               // articulosFiltrados.push({'art':formulario.articulo4});
               // paletsFiltrados.push({'palet':formulario.palets4});
             }
-            if(formulario.articulo5 != null && formulario.palets5 !=0){
-              formularioFiltrado.push({'articulo':formulario.articulo5,'palets':formulario.palets5});
+            if (formulario.articulo5 != null && formulario.palets5 != 0) {
+              formularioFiltrado.push({
+                articulo: formulario.articulo5,
+                palets: formulario.palets5
+              });
               // articulosFiltrados.push({'art':formulario.articulo5});
               // paletsFiltrados.push({'palet':formulario.palets5});
             }
-            if(formulario.articulo6 != null && formulario.palets6 !=0){
-              formularioFiltrado.push({'articulo':formulario.articulo6,'palets':formulario.palets6});
+            if (formulario.articulo6 != null && formulario.palets6 != 0) {
+              formularioFiltrado.push({
+                articulo: formulario.articulo6,
+                palets: formulario.palets6
+              });
               // articulosFiltrados.push({'art':formulario.articulo6});
               // paletsFiltrados.push({'palet':formulario.palets6});
             }
-            if(formulario.articulo7 != null && formulario.palets7 !=0){
-              formularioFiltrado.push({'articulo':formulario.articulo7,'palets':formulario.palets7});
+            if (formulario.articulo7 != null && formulario.palets7 != 0) {
+              formularioFiltrado.push({
+                articulo: formulario.articulo7,
+                palets: formulario.palets7
+              });
               // articulosFiltrados.push({'art':formulario.articulo7});
               // paletsFiltrados.push({'palet':formulario.palets7});
             }
-            if(formulario.articulo8 != null && formulario.palets8 !=0){
-              formularioFiltrado.push({'articulo':formulario.articulo8,'palets':formulario.palets8});
+            if (formulario.articulo8 != null && formulario.palets8 != 0) {
+              formularioFiltrado.push({
+                articulo: formulario.articulo8,
+                palets: formulario.palets8
+              });
               // articulosFiltrados.push({'art':formulario.articulo8});
               // paletsFiltrados.push({'palet':formulario.palets8});
             }
-            if(formulario.articulo9 != null && formulario.palets9 !=0){
-              formularioFiltrado.push({'articulo':formulario.articulo9,'palets':formulario.palets9});
+            if (formulario.articulo9 != null && formulario.palets9 != 0) {
+              formularioFiltrado.push({
+                articulo: formulario.articulo9,
+                palets: formulario.palets9
+              });
               // articulosFiltrados.push({'art':formulario.articulo9});
               // paletsFiltrados.push({'palet':formulario.palets9});
             }
-            if(formulario.articulo10 != null && formulario.palets10 !=0){
-              formularioFiltrado.push({'articulo':formulario.articulo10,'palets':formulario.palets10});
+            if (formulario.articulo10 != null && formulario.palets10 != 0) {
+              formularioFiltrado.push({
+                articulo: formulario.articulo10,
+                palets: formulario.palets10
+              });
               // articulosFiltrados.push({'art':formulario.articulo10});
               // paletsFiltrados.push({'palet':formulario.palets10});
             }
-            if(formulario.articulo11 != null && formulario.palets11 !=0){
-              formularioFiltrado.push({'articulo':formulario.articulo11,'palets':formulario.palets11});
+            if (formulario.articulo11 != null && formulario.palets11 != 0) {
+              formularioFiltrado.push({
+                articulo: formulario.articulo11,
+                palets: formulario.palets11
+              });
               // articulosFiltrados.push({'art':formulario.articulo11});
               // paletsFiltrados.push({'palet':formulario.palets11});
             }
-            if(formulario.articulo12 != null && formulario.palets12 !=0){
-              formularioFiltrado.push({'articulo':formulario.articulo12,'palets':formulario.palets12});
+            if (formulario.articulo12 != null && formulario.palets12 != 0) {
+              formularioFiltrado.push({
+                articulo: formulario.articulo12,
+                palets: formulario.palets12
+              });
               // articulosFiltrados.push({'art':formulario.articulo12});
               // paletsFiltrados.push({'palet':formulario.palets12});
             }
@@ -193,35 +260,43 @@ export class PedidoPage {
             let horaPrevista;
             let horaFormulario = formulario.horaEntrega;
 
-            if(horaFormulario == "manana1"){
-              horaPrevista = 'Por la mañana a 1ª hora';
+            if (horaFormulario == "manana1") {
+              horaPrevista = "Por la mañana a 1ª hora";
             }
-            if(horaFormulario == "manana2"){
-              horaPrevista = 'Por la mañana a 2ª hora';
+            if (horaFormulario == "manana2") {
+              horaPrevista = "Por la mañana a 2ª hora";
             }
-            if(horaFormulario == "tarde1"){
-              horaPrevista = 'Por la tarde 1ª hora';
+            if (horaFormulario == "tarde1") {
+              horaPrevista = "Por la tarde 1ª hora";
             }
-            if(horaFormulario == "tarde2"){
-              horaPrevista = 'Por la tarde 2ª hora';
+            if (horaFormulario == "tarde2") {
+              horaPrevista = "Por la tarde 2ª hora";
             }
-            if(horaFormulario == "siguienteManana"){
-              horaPrevista = 'Al día siguiente por la mañana';
+            if (horaFormulario == "siguienteManana") {
+              horaPrevista = "Al día siguiente por la mañana";
             }
-            if(horaFormulario == "siguienteTarde"){
-              horaPrevista = 'Al día siguiente por la tarde';
+            if (horaFormulario == "siguienteTarde") {
+              horaPrevista = "Al día siguiente por la tarde";
             }
 
-            this.navCtrl.push(ConfirmarPedidoPage, {              
+            // si observaciones va vacío, le da el valor de cadena vacía
+            var observ:string = "";
+            if(formulario.textArea == ""){
+              observ = " ";
+            }
+
+            this.navCtrl.push(ConfirmarPedidoPage, {
               totalPalets: totalPalets,
               datosPedido: formularioFiltrado,
               horaPrevista: horaPrevista,
               direccion: formulario.direccion,
-              observaciones: formulario.textArea,              
-              atendido: false,
-              usuario: this.currentUser              
-            });            
-            
+              observaciones: observ,
+              atendido: "NO",
+              usuario: this.currentUser,
+              email: this.email,
+              empresa: this.empresa
+              //empresa:
+            });
           }
         }
       ]
@@ -271,7 +346,7 @@ export class PedidoPage {
 
   sumar1(valor) {
     //var valorInt = parseInt(valor);
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets1 = 0;
     } else {
@@ -281,7 +356,7 @@ export class PedidoPage {
   }
 
   sumar2(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets2 = 0;
     } else {
@@ -291,7 +366,7 @@ export class PedidoPage {
   }
 
   sumar3(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets3 = 0;
     } else {
@@ -301,7 +376,7 @@ export class PedidoPage {
   }
 
   sumar4(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets4 = 0;
     } else {
@@ -311,7 +386,7 @@ export class PedidoPage {
   }
 
   sumar5(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets5 = 0;
     } else {
@@ -321,7 +396,7 @@ export class PedidoPage {
   }
 
   sumar6(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets6 = 0;
     } else {
@@ -331,7 +406,7 @@ export class PedidoPage {
   }
 
   sumar7(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets7 = 0;
     } else {
@@ -341,7 +416,7 @@ export class PedidoPage {
   }
 
   sumar8(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets8 = 0;
     } else {
@@ -351,7 +426,7 @@ export class PedidoPage {
   }
 
   sumar9(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets9 = 0;
     } else {
@@ -361,7 +436,7 @@ export class PedidoPage {
   }
 
   sumar10(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets10 = 0;
     } else {
@@ -371,7 +446,7 @@ export class PedidoPage {
   }
 
   sumar11(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets11 = 0;
     } else {
@@ -381,7 +456,7 @@ export class PedidoPage {
   }
 
   sumar12(valor) {
-    var valorInt = (valor);
+    var valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets12 = 0;
     } else {
@@ -438,22 +513,22 @@ export class PedidoPage {
       this.palets10 +
       this.palets11 +
       this.palets12;
-  }  
-
-  obtenerNumeroPedido(){
-
-    return new Promise(resolve => {
-      const dbNumeroPedido = firebase.database().
-      ref("pedidosEmail")
-      .on('value', eventListSnapshot => {      
-      console.log("Numero de pedidos: "+eventListSnapshot.numChildren());
-      this.numeroPedido = eventListSnapshot.numChildren()+1;
-    });
-      resolve(true);
-    });
-   
   }
 
+  obtenerNumeroPedido() {
+    return new Promise(resolve => {
+      const dbNumeroPedido = firebase
+        .database()
+        .ref("pedidosEmail")
+        .on("value", eventListSnapshot => {
+          console.log("Numero de pedidos: " + eventListSnapshot.numChildren());
+          this.numeroPedido = eventListSnapshot.numChildren() + 1;
+        });
+      resolve(true);
+    });
+  }
+
+  /*
   sumarContador(){
     const counterRef = firebase.database().ref("/counter");
     const q = counterRef.orderByChild("count");
@@ -474,6 +549,7 @@ export class PedidoPage {
         .update(updates);
     });
   }
+  */
 
   obtenerProductos() {
     firebase.auth().onAuthStateChanged(user => {
@@ -481,7 +557,7 @@ export class PedidoPage {
         const db = firebase
           .database()
           .ref(`/userProfile/${user.uid}/productos`)
-          .on("value", eventListSnapshot => {
+          .once("value", eventListSnapshot => {
             this.productos = [];
             eventListSnapshot.forEach(snap => {
               this.productos.push({
@@ -502,7 +578,7 @@ export class PedidoPage {
         const db2 = firebase
           .database()
           .ref(`/userProfile/${user.uid}/direccion`)
-          .on("value", eventListSnapshot => {
+          .once("value", eventListSnapshot => {
             this.direcciones = [];
             eventListSnapshot.forEach(snap => {
               this.direcciones.push({
@@ -516,8 +592,24 @@ export class PedidoPage {
     });
   }
 
+  obtenerEmailEmpresa() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.currentUser = user.uid;
+        const db2 = firebase
+          .database()
+          .ref(`/userProfile/${user.uid}`)
+          .once("value", snap => {
+            this.email = snap.val().email;
+            this.empresa = snap.val().empresa;
+          });
+      }
+    });
+  }
+
   ionViewDidLoad() {
     this.obtenerProductos();
     this.obtenerDirecciones();
+    this.obtenerEmailEmpresa();
   }
 }

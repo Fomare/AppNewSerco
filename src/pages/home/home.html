@@ -1,5 +1,9 @@
 <ion-header>
   <ion-navbar color="primary">
+    <ion-buttons end>
+      <button ion-button (click)="salir()"> 
+          <ion-icon name="log-out"></ion-icon> </button>
+    </ion-buttons>
     <ion-title>
       Bienvenido
     </ion-title>
@@ -10,36 +14,41 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col >
-        
+      <ion-col>
+
       </ion-col>
-      <ion-col >
+      <ion-col>
         <img src="assets/imgs/logo2.png">
-      </ion-col>
-    </ion-row>
-
-      <ion-row>
-        <ion-col col-12>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, libero. Repellat, rerum! Possimus, quo qui minus ipsum debitis cupiditate voluptatibus labore nisi voluptas eligendi atque harum consectetur assumenda optio iusto?</p>
-        </ion-col>
-      </ion-row>
-
-    <ion-row>
-      <ion-col col-6>
-        <button ion-button (click)="goUltimoPedido()">Último pedido</button>
-      </ion-col>
-
-      <ion-col col-6>
-        <button ion-button (click)="goNuevoPedido()">Nuevo pedido</button>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col col-12>
-        <div text-center>
-          <ion-img width="200" height="170" src="assets/imgs/teleoperadora.jpg"></ion-img>
-        </div>
+        <h6 ion-text>Ya eres miembro de la comunidad New Serco. Con esta aplicación podrás hacer tus pedidos de forma rápida y directa</h6>
+        
+        <h6 ion-text>¿Qué necesitas?</h6>
       </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button (click)="goUltimoPedido()" [disabled]="habilitarUltimoPedido">Último pedido</button>
+      </ion-col>
+
+      <ion-col text-center>
+        <button ion-button (click)="goNuevoPedido()">Nuevo pedido</button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col text-center>
+
+        <!-- <ion-img width="200" height="170" src="assets/imgs/teleoperadora.jpg"></ion-img> -->
+        <!-- <ion-img width="400" height="340" src="assets/imgs/teleoperadora.jpg"></ion-img> -->
+        <ion-img width="315" height="270" src="assets/imgs/teleoperadora.jpg"></ion-img>
+
+      </ion-col>
+
     </ion-row>
   </ion-grid>
 

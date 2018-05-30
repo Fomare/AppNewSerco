@@ -2,6 +2,9 @@
 <ion-header>
 
   <ion-navbar color="primary">
+      <ion-buttons end>
+          <button ion-button (click)="salir()"> <ion-icon name="log-out"></ion-icon> </button>
+        </ion-buttons>
     <ion-title>Último Pedido Realizado</ion-title>
   </ion-navbar>
 
@@ -250,12 +253,13 @@
           </ion-col>
           <ion-col col-5>
             <ion-item text-right>
-              <strong>Total palets</strong>
+              <strong>Total palets</strong>             
             </ion-item>
           </ion-col>
           <ion-col col-3>
             <ion-item text-center style="background-color: #f53d3d">
               <strong> {{totalPalets}}</strong>
+              
             </ion-item>
           </ion-col>
         </ion-row>

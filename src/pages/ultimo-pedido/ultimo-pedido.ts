@@ -35,12 +35,17 @@ export class UltimoPedidoPage {
   palets11: number;
   palets12: number;
 
+  prueba: number = 2;
+  totalPrueba: number;
+  fomare1: number;
+  fomare2: number;
+
   cont; // la uso para el contador
 
   numeroArticulos = 3;
 
   public totalPalets: number;
-  textArea: string = "";
+  textArea: string;
 
   public productos: Array<any>;
   public direcciones: Array<any>;  
@@ -53,8 +58,41 @@ export class UltimoPedidoPage {
       this.userUid = this.navParams.get("uid"); 
       this.myForm = this.createMyForm();
       this.productos = [];    
-      this.totalPalets = 0;
-    }
+      //this.totalPalets = 0;
+      this.textArea = " ";
+      
+  }
+
+  logout(): Promise<void> {
+    const userId: string = firebase.auth().currentUser.uid;
+    firebase
+      .database()
+      .ref(`/userProfile/${userId}`)
+      .off();
+    return firebase.auth().signOut();
+  }
+
+  salir() {
+    let confirm = this.alertCtrl.create({
+      title: "Cerrar sesión",
+      message: "¿Estás seguro de que quieres cerrar la aplicación?",
+      buttons: [
+        {
+          text: "No",
+          handler: () => {
+            return true;
+          }
+        },
+        {
+          text: "Sí",
+          handler: () => {
+            this.logout();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 
   saveData() {
     if (
@@ -175,12 +213,17 @@ export class UltimoPedidoPage {
               horaPrevista = 'Al día siguiente por la tarde';
             }
 
+            var observ:string = "";
+            if(formulario.textArea == ""){
+              observ = " ";
+            }
+
             this.navCtrl.push(ConfirmarPedidoPage, {              
               totalPalets: totalPalets,
               datosPedido: formularioFiltrado,
               horaPrevista: horaPrevista,
               direccion: formulario.direccion,
-              observaciones: formulario.textArea,             
+              observaciones: observ,             
               atendido: false,
               usuario: this.currentUser              
             });
@@ -231,39 +274,38 @@ export class UltimoPedidoPage {
     });
   }
 
-  sumar1(valor) {
-    //const valorInt = parseInt(valor);
-    const valorInt = (valor);
-    if (isNaN(valorInt)) {
+  sumar1(valor) {    
+    const valorInt1 = parseInt(valor);
+    if (isNaN(valorInt1)) {
       this.palets1 = 0;
     } else {
-      this.palets1 = valorInt;
+      this.palets1 = valorInt1;
     }
     this.sumar();
   }
 
   sumar2(valor) {
-    const valorInt = (valor);
-    if (isNaN(valorInt)) {
+    const valorInt2 = parseInt(valor);
+    if (isNaN(valorInt2)) {
       this.palets2 = 0;
     } else {
-      this.palets2 = valorInt;
+      this.palets2 = valorInt2;
     }
     this.sumar();
   }
 
   sumar3(valor) {
-    const valorInt = (valor);
-    if (isNaN(valorInt)) {
+    const valorInt3 = parseInt(valor);
+    if (isNaN(valorInt3)) {
       this.palets3 = 0;
     } else {
-      this.palets3 = valorInt;
+      this.palets3 = valorInt3;
     }
     this.sumar();
   }
 
   sumar4(valor) {
-    const valorInt = (valor);
+    const valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets4 = 0;
     } else {
@@ -273,7 +315,7 @@ export class UltimoPedidoPage {
   }
 
   sumar5(valor) {
-    const valorInt = (valor);
+    const valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets5 = 0;
     } else {
@@ -283,7 +325,7 @@ export class UltimoPedidoPage {
   }
 
   sumar6(valor) {
-    const valorInt = (valor);
+    const valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets6 = 0;
     } else {
@@ -293,7 +335,7 @@ export class UltimoPedidoPage {
   }
 
   sumar7(valor) {
-    const valorInt = (valor);
+    const valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets7 = 0;
     } else {
@@ -303,7 +345,7 @@ export class UltimoPedidoPage {
   }
 
   sumar8(valor) {
-    const valorInt = (valor);
+    const valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets8 = 0;
     } else {
@@ -313,7 +355,7 @@ export class UltimoPedidoPage {
   }
 
   sumar9(valor) {
-    const valorInt = (valor);
+    const valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets9 = 0;
     } else {
@@ -323,7 +365,7 @@ export class UltimoPedidoPage {
   }
 
   sumar10(valor) {
-    const valorInt = (valor);
+    const valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets10 = 0;
     } else {
@@ -333,7 +375,7 @@ export class UltimoPedidoPage {
   }
 
   sumar11(valor) {
-    const valorInt = (valor);
+    const valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets11 = 0;
     } else {
@@ -343,7 +385,7 @@ export class UltimoPedidoPage {
   }
 
   sumar12(valor) {
-    const valorInt = (valor);
+    const valorInt = parseInt(valor);
     if (isNaN(valorInt)) {
       this.palets12 = 0;
     } else {
@@ -386,7 +428,7 @@ export class UltimoPedidoPage {
     if (isNaN(this.palets12)) {
       this.palets12 = 0;
     }
-
+    
     this.totalPalets =
       this.palets1 +
       this.palets2 +
@@ -395,7 +437,7 @@ export class UltimoPedidoPage {
       this.palets5 +
       this.palets6 +
       this.palets7 +
-      this.palets8 +
+      this.palets8 + //aquí totalPalets pasa a valer NaN
       this.palets9 +
       this.palets10 +
       this.palets11 +
@@ -415,6 +457,7 @@ export class UltimoPedidoPage {
     });
   }
 
+  /*
   sumarContador(){
     const counterRef = firebase.database().ref("/counter");
     const q = counterRef.orderByChild("count");
@@ -436,6 +479,7 @@ export class UltimoPedidoPage {
         .update(updates);
     });
   }
+  */
 
   obtenerProductos() {
     firebase.auth().onAuthStateChanged(user => {
@@ -483,7 +527,10 @@ export class UltimoPedidoPage {
     const ref = firebase.database().ref(`/userProfile/${this.userUid}/pedidos`);
     
     const query = ref.orderByKey().limitToLast(1);
-    query.on('child_added', snap => {      
+    query.on('child_added', snap => { 
+      
+      console.log('Observaciones: '+snap.val().observaciones);
+      
       
       var lastKey = snap.key;
      
@@ -518,7 +565,7 @@ export class UltimoPedidoPage {
       this.numeroArticulos = numeroArticulos;
 
       var art1 = snap.val().datosPedido[0].articulo;
-      var pal1 = (snap.val().datosPedido[0].palets);
+      var pal1 = parseInt(snap.val().datosPedido[0].palets);
       
 
       if(numeroArticulos == 1){        
@@ -530,7 +577,7 @@ export class UltimoPedidoPage {
       if(numeroArticulos == 2){
         art2 = snap.val().datosPedido[1].articulo;
         //pal2 = parseInt(snap.val().datosPedido[1].palets);
-        pal2 = (snap.val().datosPedido[1].palets);
+        pal2 = parseInt(snap.val().datosPedido[1].palets);
         
         art3 = art4 = art5 = art6 = art7 = art8 = art9 = art10 = art11 = art12 = null;
         pal3 = pal4 = pal5 = pal6 = pal7 = pal8 = pal9 = pal10 = pal11 = pal12 = null;
@@ -538,10 +585,10 @@ export class UltimoPedidoPage {
 
       if(numeroArticulos == 3){
         art2 = snap.val().datosPedido[1].articulo;
-        pal2 = (snap.val().datosPedido[1].palets);
+        pal2 = parseInt(snap.val().datosPedido[1].palets);
 
         art3 = snap.val().datosPedido[2].articulo;
-        pal3 = (snap.val().datosPedido[2].palets);
+        pal3 = parseInt(snap.val().datosPedido[2].palets);
         
 
         art4 = art5 = art6 = art7 = art8 = art9 = art10 = art11 = art12 = null;
@@ -778,8 +825,10 @@ export class UltimoPedidoPage {
 
         art12 = snap.val().datosPedido[11].articulo;
         pal12 = snap.val().datosPedido[11].palets;
+
         
-      }    
+      }  
+
       
       this.myForm.setValue({
        
@@ -810,6 +859,7 @@ export class UltimoPedidoPage {
         direccion:snap.val().direccion,        
         horaEntrega: horaParaFormulario,       
         textArea: snap.val().observaciones
+        //textArea: "Prueba"
 
       });      
   });
@@ -820,6 +870,12 @@ ionViewDidLoad() {
   this.obtenerProductos();
   this.obtenerDirecciones();
   this.obtenerKeyUltimoPedido();  
+  this.totalPrueba = this.palets1 + this.prueba;
+      this.fomare1 = this.palets1 + this.palets2;
+      this.fomare2 = this.palets1 + 1;
+      console.log("Total Prueba"+this.totalPrueba);
+      console.log("Fomare 1: "+this.fomare1);
+      console.log("Fomare 2: "+this.fomare2);
 }
   
 

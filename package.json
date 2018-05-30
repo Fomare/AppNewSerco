@@ -38,6 +38,9 @@
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
   },
+  "config": {
+    "ionic_source_map": "source-map"
+  },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.9",
     "typescript": "^2.8.3"

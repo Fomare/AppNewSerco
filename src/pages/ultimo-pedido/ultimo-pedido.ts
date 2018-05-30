@@ -214,9 +214,13 @@ export class UltimoPedidoPage {
             }
 
             var observ:string = "";
-            if(formulario.textArea == ""){
+            if(formulario.textArea == null){
               observ = " ";
+            }else{
+              observ = formulario.textArea;
             }
+
+            
 
             this.navCtrl.push(ConfirmarPedidoPage, {              
               totalPalets: totalPalets,
@@ -829,7 +833,23 @@ export class UltimoPedidoPage {
         
       }  
 
-      
+      this.palets1 = pal1;
+      this.palets2 = pal2;
+      this.palets3 = pal3;
+
+      this.palets4 = pal4;
+      this.palets5 = pal5;
+      this.palets6 = pal6;
+
+      this.palets7 = pal7;
+      this.palets8 = pal8;
+      this.palets9 = pal9;
+
+      this.palets10 = pal10;
+      this.palets11 = pal11;
+      this.palets12 = pal12;
+
+
       this.myForm.setValue({
        
         articulo1: art1,
@@ -844,18 +864,18 @@ export class UltimoPedidoPage {
         articulo10: art10,
         articulo11: art11,
         articulo12: art12,
-        palets1: pal1,
-        palets2: pal2,
-        palets3: pal3,
-        palets4: pal4,
-        palets5: pal5,
-        palets6: pal6,
-        palets7: pal7,
-        palets8: pal8,
-        palets9: pal9,
-        palets10: pal10,
-        palets11: pal11,
-        palets12: pal12,       
+        palets1: this.palets1,
+        palets2: this.palets2,
+        palets3: this.palets3,
+        palets4: this.palets4,
+        palets5: this.palets5,
+        palets6: this.palets6,
+        palets7: this.palets7,
+        palets8: this.palets8,
+        palets9: this.palets9,
+        palets10: this.palets10,
+        palets11: this.palets11,
+        palets12: this.palets12,       
         direccion:snap.val().direccion,        
         horaEntrega: horaParaFormulario,       
         textArea: snap.val().observaciones
@@ -871,8 +891,8 @@ ionViewDidLoad() {
   this.obtenerDirecciones();
   this.obtenerKeyUltimoPedido();  
   this.totalPrueba = this.palets1 + this.prueba;
-      this.fomare1 = this.palets1 + this.palets2;
-      this.fomare2 = this.palets1 + 1;
+  this.fomare1 = this.palets1 + this.palets2;
+  this.fomare2 = this.palets1 + 1;
       console.log("Total Prueba"+this.totalPrueba);
       console.log("Fomare 1: "+this.fomare1);
       console.log("Fomare 2: "+this.fomare2);

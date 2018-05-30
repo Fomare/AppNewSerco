@@ -281,8 +281,12 @@ export class PedidoPage {
 
             // si observaciones va vacío, le da el valor de cadena vacía
             var observ:string = "";
-            if(formulario.textArea == ""){
+            console.log('Text Area: '+formulario.textArea);
+            if(formulario.textArea == null ){
               observ = " ";
+            }
+            else{
+              observ = formulario.textArea;
             }
 
             this.navCtrl.push(ConfirmarPedidoPage, {

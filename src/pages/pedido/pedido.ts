@@ -123,15 +123,15 @@ export class PedidoPage {
     }
 
     if (
-      (this.palets4 == 0 && this.myForm.value.articulo4 != null) ||
-      (this.palets5 == 0 && this.myForm.value.articulo5 != null) ||
-      (this.palets6 == 0 && this.myForm.value.articulo6 != null) ||
-      (this.palets7 == 0 && this.myForm.value.articulo7 != null) ||
-      (this.palets8 == 0 && this.myForm.value.articulo8 != null) ||
-      (this.palets9 == 0 && this.myForm.value.articulo9 != null) ||
-      (this.palets10 == 0 && this.myForm.value.articulo10 != null) ||
-      (this.palets11 == 0 && this.myForm.value.articulo11 != null) ||
-      (this.palets12 == 0 && this.myForm.value.articulo12 != null)
+      ((this.palets4 == null || this.palets4 == 0 ) && this.myForm.value.articulo4 != null) ||
+      ((this.palets5 == null || this.palets5 == 0 ) && this.myForm.value.articulo5 != null) ||
+      ((this.palets6 == null || this.palets6 == 0 ) && this.myForm.value.articulo6 != null) ||
+      ((this.palets7 == null || this.palets7 == 0 ) && this.myForm.value.articulo7 != null) ||
+      ((this.palets8 == null || this.palets8 == 0 ) && this.myForm.value.articulo8 != null) ||
+      ((this.palets9 == null || this.palets9 == 0 ) && this.myForm.value.articulo9 != null) ||
+      ((this.palets10 == null || this.palets10 == 0 ) && this.myForm.value.articulo10 != null) ||
+      ((this.palets11 == null || this.palets11 == 0 ) && this.myForm.value.articulo11 != null) ||
+      ((this.palets12 == null || this.palets12 == 0 ) && this.myForm.value.articulo12 != null)
     ) {
       let alert2 = this.alertCtrl.create({
         title: "Faltan datos",

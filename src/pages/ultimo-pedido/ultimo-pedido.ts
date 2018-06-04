@@ -42,7 +42,7 @@ export class UltimoPedidoPage {
 
   cont; // la uso para el contador
 
-  numeroArticulos = 3;
+  numeroArticulosHTML = 3;
 
   public totalPalets: number;
   textArea: string;
@@ -117,16 +117,20 @@ export class UltimoPedidoPage {
       return;
     }
 
+    console.log
+
     if (
-      (this.palets4 == 0 && this.myForm.value.articulo4 != null) ||
-      (this.palets5 == 0 && this.myForm.value.articulo5 != null) ||
-      (this.palets6 == 0 && this.myForm.value.articulo6 != null) ||
-      (this.palets7 == 0 && this.myForm.value.articulo7 != null) ||
-      (this.palets8 == 0 && this.myForm.value.articulo8 != null) ||
-      (this.palets9 == 0 && this.myForm.value.articulo9 != null) ||
-      (this.palets10 == 0 && this.myForm.value.articulo10 != null) ||
-      (this.palets11 == 0 && this.myForm.value.articulo11 != null) ||
-      (this.palets12 == 0 && this.myForm.value.articulo12 != null)
+      ((this.palets2 == null || this.palets2 == 0 ) && this.myForm.value.articulo2 != null) ||
+      ((this.palets3 == null || this.palets3 == 0 ) && this.myForm.value.articulo3 != null) ||
+      ((this.palets4 == null || this.palets4 == 0 ) && this.myForm.value.articulo4 != null) ||
+      ((this.palets5 == null || this.palets5 == 0 ) && this.myForm.value.articulo5 != null) ||
+      ((this.palets6 == null || this.palets6 == 0 ) && this.myForm.value.articulo6 != null) ||
+      ((this.palets7 == null || this.palets7 == 0 ) && this.myForm.value.articulo7 != null) ||
+      ((this.palets8 == null || this.palets8 == 0 ) && this.myForm.value.articulo8 != null) ||
+      ((this.palets9 == null || this.palets9 == 0 ) && this.myForm.value.articulo9 != null) ||
+      ((this.palets10 == null || this.palets10 == 0 ) && this.myForm.value.articulo10 != null) ||
+      ((this.palets11 == null || this.palets11 == 0 ) && this.myForm.value.articulo11 != null) ||
+      ((this.palets12 == null || this.palets12 == 0 ) && this.myForm.value.articulo12 != null)
     ) {
       let alert2 = this.alertCtrl.create({
         title: "Faltan datos",
@@ -147,9 +151,7 @@ export class UltimoPedidoPage {
         },
         {
           text: "Ok",
-          handler: () => {
-            
-            
+          handler: () => {          
             let totalPalets = this.totalPalets;
             let formulario = this.myForm.value;
             let formularioFiltrado = [];
@@ -239,10 +241,10 @@ export class UltimoPedidoPage {
   }
 
   mostrarArticulo() {
-    if (this.numeroArticulos >= 12) {
+    if (this.numeroArticulosHTML >= 12) {
       return false;
     } else {
-      this.numeroArticulos++;
+      this.numeroArticulosHTML++;
     }
   }
 
@@ -566,7 +568,7 @@ export class UltimoPedidoPage {
       var pal2, pal3, pal4, pal5, pal6, pal7, pal8, pal9, pal10, pal11, pal12;
 
       var numeroArticulos = snap.val().datosPedido.length;
-      this.numeroArticulos = numeroArticulos;
+      this.numeroArticulosHTML = numeroArticulos;
 
       var art1 = snap.val().datosPedido[0].articulo;
       var pal1 = parseInt(snap.val().datosPedido[0].palets);

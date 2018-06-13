@@ -44,6 +44,9 @@ export class UltimoPedidoPage {
 
   numeroArticulosHTML = 3;
 
+  email;
+  empresa;
+
   public totalPalets: number;
   textArea: string;
 
@@ -230,8 +233,10 @@ export class UltimoPedidoPage {
               horaPrevista: horaPrevista,
               direccion: formulario.direccion,
               observaciones: observ,             
-              atendido: false,
-              usuario: this.currentUser              
+              atendido: "NO",
+              usuario: this.currentUser,
+              email: this.email,
+              empresa: this.empresa            
             });
           }
         }
@@ -572,6 +577,9 @@ export class UltimoPedidoPage {
 
       var art1 = snap.val().datosPedido[0].articulo;
       var pal1 = parseInt(snap.val().datosPedido[0].palets);
+
+      this.email = snap.val().email;
+      this.empresa = snap.val().empresa;
       
 
       if(numeroArticulos == 1){        
@@ -891,13 +899,7 @@ export class UltimoPedidoPage {
 ionViewDidLoad() {
   this.obtenerProductos();
   this.obtenerDirecciones();
-  this.obtenerKeyUltimoPedido();  
-  this.totalPrueba = this.palets1 + this.prueba;
-  this.fomare1 = this.palets1 + this.palets2;
-  this.fomare2 = this.palets1 + 1;
-      console.log("Total Prueba"+this.totalPrueba);
-      console.log("Fomare 1: "+this.fomare1);
-      console.log("Fomare 2: "+this.fomare2);
+  this.obtenerKeyUltimoPedido();   
 }
   
 
